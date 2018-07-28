@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Simple picture upload with preview</title>
+	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<script>
+	$(function(){
+		$("[type=file]").change(function(){
+			var file = this.files[0],
+				reader = new FileReader(),
+				img = $(this).siblings('img')
+			reader.onload = function (e) {
+				img.attr('src', e.target.result);
+			}
+			reader.readAsDataURL(file);
+		})
+	})
+	</script>
+	<style>
+		form>img
+		{
+			border: 3px solid red;
+			min-width: 100px;
+			min-height: 100px;
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<form method="post" enctype="multipart/form-data" >
+		<input name='file' type="file" accept="image/*" /> <!-- cute but only works in some browsers-->
+		<img>
+		<input type="submit" value="Send"/><input class="reset" type="button" value="Reset" />
+	</form>
+
+</body>
+</html
